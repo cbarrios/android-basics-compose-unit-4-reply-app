@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.reply.R
@@ -85,7 +86,9 @@ fun ReplyHomeScreen(
     )
 
     if (navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER) {
+        val navigationDrawerContentDescription = stringResource(R.string.navigation_drawer)
         PermanentNavigationDrawer(
+            modifier = Modifier.testTag(navigationDrawerContentDescription),
             drawerContent = {
                 NavigationDrawerContent(
                     selectedDestination = replyUiState.currentMailbox,
@@ -142,7 +145,9 @@ private fun ReplyAppContent(
 ) {
     Row(modifier = modifier.fillMaxSize()) {
         AnimatedVisibility(visible = navigationType == ReplyNavigationType.NAVIGATION_RAIL) {
+            val navigationRailContentDescription = stringResource(R.string.navigation_rail)
             ReplyNavigationRail(
+                modifier = Modifier.testTag(navigationRailContentDescription),
                 currentTab = replyUiState.currentMailbox,
                 onTabPressed = onTabPressed,
                 navigationItemContentList = navigationItemContentList
@@ -167,7 +172,9 @@ private fun ReplyAppContent(
                 )
             }
             AnimatedVisibility(visible = navigationType == ReplyNavigationType.BOTTOM_NAVIGATION) {
+                val bottomNavigationContentDescription = stringResource(R.string.navigation_bottom)
                 ReplyBottomNavigationBar(
+                    modifier = Modifier.testTag(bottomNavigationContentDescription),
                     currentTab = replyUiState.currentMailbox,
                     onTabPressed = onTabPressed,
                     navigationItemContentList = navigationItemContentList
